@@ -1,7 +1,10 @@
 import React, { FC } from 'react';
-import MutationObserver from './MutationObserver';
+// import MutationObserver from './MutationObserver';
+// import IntersectionComponent from './IntersectionObserver';
+import Anchor from './example/Anchor';
+import './index.css';
 const App: FC = () => {
-  return <MutationObserver />;
+  return <Anchor />;
 };
 
 export default App;
