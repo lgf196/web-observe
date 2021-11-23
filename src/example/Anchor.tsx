@@ -1,12 +1,12 @@
-import React, { memo, useEffect } from 'react';
-
+import React, { memo, useEffect, useState } from 'react';
 const Anchor = memo(function Anchor() {
+  const [dataKey, setDataKey] = useState<string | null>(null);
   const navList = [
     { title: '家电区', bg: '#ff000026', id: 'homeAppliances' },
     { title: '服装区', bg: '#9c27b03d', id: 'clothing' },
     { title: '美食区', bg: '#3f51b547', id: 'delicacy' },
     { title: '生活区', bg: '#03a9f442', id: 'life' },
-    { title: '婴儿区', bg: '#ff572238', id: 'baby' },
+    { title: '婴儿区', bg: '#ff572238', id: 'baby2' },
   ];
   const getStyle = (bg: string): React.CSSProperties => ({
     background: bg,
@@ -23,14 +23,11 @@ const Anchor = memo(function Anchor() {
     const callback: IntersectionObserverCallback = (entries) => {
       entries.forEach((item) => {
         if (item.isIntersecting) {
-          console.log(`可见`);
-        } else {
-          console.log(`不可见`);
+          setDataKey((item.target as any).dataset.key);
         }
       });
-      console.log(`entries`, entries);
     };
-    const intersection = new IntersectionObserver(callback);
+    const intersection = new IntersectionObserver(callback, { threshold: 0.8 });
 
     navList.forEach((item) => {
       const element = document.querySelector(`#${item.id}`);
@@ -43,7 +40,7 @@ const Anchor = memo(function Anchor() {
   return (
     <div>
       {navList.map((item, index) => (
-        <div style={getStyle(item.bg)} id={item.id} key={index}>
+        <div style={getStyle(item.bg)} id={item.id} key={index} data-key={item.id}>
           <h2 style={{ textAlign: 'center' }}>{item.title}</h2>
         </div>
       ))}
@@ -59,7 +56,11 @@ const Anchor = memo(function Anchor() {
         {navList.map((item) => (
           <li
             key={item.id}
-            style={{ padding: '10px', cursor: 'pointer' }}
+            style={{
+              padding: '10px',
+              cursor: 'pointer',
+              background: dataKey === item.id ? 'red' : 'none',
+            }}
             onClick={() => positioningNavigation(item.id)}
           >
             {item.title}
