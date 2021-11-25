@@ -123,7 +123,7 @@ const IntersectionComponent = memo(function IntersectionComponent() {
       <p>ant-simple-pro</p>
       <p>ant-simple-pro</p>
       <p>ant-simple-pro</p>
-      <div id="scrollerFooter">afaf</div>
+      <div id="scrollerFooter">我要出来啦</div>
     </div>
   );
 });

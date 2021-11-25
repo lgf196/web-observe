@@ -23,6 +23,7 @@ const Anchor = memo(function Anchor() {
     const callback: IntersectionObserverCallback = (entries) => {
       entries.forEach((item) => {
         if (item.isIntersecting) {
+          console.log(`item`, item);
           setDataKey((item.target as any).dataset.key);
         }
       });
